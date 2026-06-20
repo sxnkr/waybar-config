@@ -1,0 +1,121 @@
+@define-color bg      rgba(10, 13, 18, 0.85);
+@define-color bg-alt  rgba(255, 255, 255, 0.07);
+@define-color border  rgba(255, 255, 255, 0.08);
+@define-color fg      #cdd6f4;
+@define-color dim     rgba(205, 214, 244, 0.35);
+@define-color accent  #89b4fa;
+@define-color red     #f38ba8;
+@define-color yellow  #fab387;
+@define-color green   #a6e3a1;
+
+* {
+    font-family: "JetBrains Mono", "FiraCode Nerd Font", "Symbols Nerd Font Mono", sans-serif;
+    font-size: 13px;
+    min-height: 0;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
+}
+
+window#waybar {
+    background: transparent;
+    color: @fg;
+}
+
+/* ── Shared pill style ───────────────────────────────────────────────── */
+#workspaces,
+#window,
+#network,
+#pulseaudio,
+#battery,
+#clock,
+#tray {
+    background: @bg;
+    border: 1px solid @border;
+    border-radius: 999px;
+}
+
+/* ── Workspaces ──────────────────────────────────────────────────────── */
+#workspaces {
+    padding: 3px 5px;
+    margin: 0 3px;
+}
+
+#workspaces button {
+    background: transparent;
+    color: @dim;
+    padding: 2px 11px;
+    border-radius: 999px;
+    transition: all 0.2s ease;
+    min-width: 0;
+}
+
+#workspaces button.active {
+    background: @bg-alt;
+    color: @fg;
+    border: 1px solid @border;
+}
+
+#workspaces button.urgent { color: @red; }
+
+#workspaces button:hover {
+    background: @bg-alt;
+    color: @fg;
+}
+
+/* ── Window title ────────────────────────────────────────────────────── */
+#window {
+    color: white;
+    padding: 4px 20px;
+    margin: 0 3px;
+}
+
+/* ── Right modules ───────────────────────────────────────────────────── */
+#network,
+#pulseaudio,
+#battery,
+#clock,
+#tray {
+    padding: 4px 14px;
+    margin: 0 3px;
+    transition: background 0.2s ease;
+}
+
+#network,
+#pulseaudio,
+#battery { color: @fg; }
+
+#clock { color: @accent; }
+
+#network:hover,
+#pulseaudio:hover,
+#battery:hover,
+#clock:hover {
+    background: @bg-alt;
+}
+
+#battery.charging          { color: @green; }
+#battery.warning:not(.charging)  { color: @yellow; }
+#battery.critical:not(.charging) {
+    color: @red;
+    animation: blink 0.6s ease-in-out infinite alternate;
+}
+
+@keyframes blink {
+    to { color: rgba(243, 139, 168, 0.3); }
+}
+
+#network.disconnected { color: @dim; }
+
+#tray { padding: 4px 10px; }
+#tray > .passive { -gtk-icon-effect: dim; }
+#tray > .needs-attention { -gtk-icon-effect: highlight; }
+
+tooltip {
+    background: rgba(10, 13, 18, 0.95);
+    color: @fg;
+    border: 1px solid @border;
+    border-radius: 12px;
+    padding: 6px 12px;
+}

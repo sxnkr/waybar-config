@@ -1,0 +1,100 @@
+{
+    "layer": "top",
+    "position": "top",
+    "exclusive": true,
+    "passthrough": false,
+    "gtk-layer-shell": true,
+    "output": ["eDP-1"],
+    "height": 32,
+    "margin-top": 8,
+    "margin-left": 12,
+    "margin-right": 12,
+
+    "modules-left": [
+        "hyprland/workspaces",
+        "hyprland/window"
+    ],
+    "modules-center": [],
+    "modules-right": [
+        "network",
+        "pulseaudio",
+        "battery#bat0",
+        "battery#bat1",
+        "clock",
+        "tray"
+    ],
+
+    "hyprland/workspaces": {
+        "disable-scroll": false,
+        "all-outputs": true,
+        "on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e+1\" })'",
+        "on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e-1\" })'",
+        "format": "{icon}",
+        "format-icons": {
+            "1": "I", "2": "II", "3": "III", "4": "IV", "5": "V",
+            "6": "VI", "7": "VII", "8": "VIII", "9": "IX", "10": "X",
+            "default": "·"
+        }
+    },
+
+    "hyprland/window": {
+        "format": "{title}",
+        "max-length": 60,
+        "separate-outputs": true,
+        "rewrite": {
+            "": "sxnkr"
+        }
+    },
+
+    "network": {
+        "interface": "wlo1",
+        "format-wifi": "  {essid}  {bandwidthDownBytes}",
+        "format-ethernet": "󰈀 {ifname}",
+        "format-disconnected": "󰖪 offline",
+        "interval": 2,
+        "tooltip-format-wifi": "{essid} {signaldBm}dBm\n {bandwidthDownBytes}  {bandwidthUpBytes}"
+    },
+
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "󰝟 muted",
+        "format-icons": { "default": ["󰕿", "󰖀", "󰕾"] },
+        "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+        "on-click-right": "pavucontrol",
+        "scroll-step": 5
+    },
+
+    "battery#bat0": {
+        "bat": "BAT0",
+        "adapter": "ACAD",
+        "poll-interval": 5,
+        "states": { "warning": 30, "critical": 15 },
+        "format": "{icon} {capacity}%",
+        "format-charging": "󰂄 {capacity}%",
+        "format-full": "󰁹 full",
+        "format-icons": ["󰁺","󰁻","󰁼","󰁽","󰁾","󰁿","󰂀","󰂁","󰂂","󰁹"]
+    },
+
+    "battery#bat1": {
+        "bat": "BAT1",
+        "adapter": "ACAD",
+        "poll-interval": 5,
+        "states": { "warning": 30, "critical": 15 },
+        "format": "{icon} {capacity}%",
+        "format-charging": "󰂄 {capacity}%",
+        "format-full": "󰁹 full",
+        "format-icons": ["󰁺","󰁻","󰁼","󰁽","󰁾","󰁿","󰂀","󰂁","󰂂","󰁹"]
+    },
+
+    "clock": {
+        "interval": 1,
+        "format": "  {:%a %d %b  %H:%M}",
+        "format-alt": "{:%Y-%m-%d  %H:%M:%S}",
+        "tooltip": false
+    },
+
+    "tray": {
+        "icon-size": 15,
+        "spacing": 8
+    }
+}
